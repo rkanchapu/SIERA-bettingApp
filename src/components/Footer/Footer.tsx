@@ -2,7 +2,11 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import paths from '../../router/paths';
 
-function Footer() {
+export interface Props {
+  REACT_APP_NAME: String;
+}
+
+const Footer: React.FC<Props> = ({ REACT_APP_NAME }) => {
   const history = useHistory();
   /* navigate function */
   const navigate = (path: string) => {
@@ -17,7 +21,7 @@ function Footer() {
           rel="noopener noreferrer"
           title="Home page"
         >
-          {process.env.REACT_APP_NAME}
+          {REACT_APP_NAME}
         </a>
       </div>
 

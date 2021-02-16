@@ -101,9 +101,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface Props {
   bets: Array<SelectionItem>;
   navigate: (path: String) => void;
+  REACT_APP_NAME: String
 }
 
-const HeaderWithDrawer: React.FC<Props> = ({ bets, navigate }) => {
+const HeaderWithDrawer: React.FC<Props> = ({ bets, navigate, REACT_APP_NAME }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -161,7 +162,7 @@ const HeaderWithDrawer: React.FC<Props> = ({ bets, navigate }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap className="text-white">
-            {process.env.REACT_APP_NAME}
+            {REACT_APP_NAME}
           </Typography>
         </Toolbar>
       </AppBar>

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import appConfig from "../../appConfig";
 import Component from "./HeaderWithDrawer";
 
 function Header(props) {
@@ -9,7 +10,10 @@ function Header(props) {
   const navigate = (path) => {
     history.push(path);
   };
-  return <Component {...props} navigate={navigate} />;
+  const { REACT_APP_NAME } = appConfig();
+  return (
+    <Component {...props} navigate={navigate} REACT_APP_NAME={REACT_APP_NAME} />
+  );
 }
 
 const mapStateToProps = (state) => ({
