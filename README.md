@@ -44,3 +44,31 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Technology used to build this application
+1. React by using create-react-app's Typescript template - 17.0.1
+
+2. React-Redux: Used to manage the application's reducer
+3. Redux-Thunk: Used as a middleware for the redux store
+
+4. Bootstrap, React-Bootstrap, Material UI, Ant-Design: UI components are inspired from these libraries
+
+5. Axios: Used to make API calls
+6. react-router-dom: Used to create different paths of the application
+7. prop-types: Used to define the props passed to the reusable components
+8. Typescript - tsx files: React components are written in Typescript.
+
+
+## run the application in development mode
+## linux/mac machine
+1. clone this repository
+2. open terminal from the repository path
+3. use "npm start" in it
+4. application will start running on "localhost:3000"
+
+## windows machine
+1. clone this repository
+2. open command prompt from the repository path
+3. use "npm start" in it
+4. application will start running on "localhost:3000"
+

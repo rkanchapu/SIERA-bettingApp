@@ -1,0 +1,15 @@
+a:hover {
+  color: #40a9ff;
+}
+.word-wrap-break {
+  word-wrap: break-word !important;
+}
+.btn {
+  min-width: 5rem;
+}
+.link a:hover {
+  color: #40a9ff !important;
+}
+.links a:hover {
+  color: #40a9ff !important;
+}
