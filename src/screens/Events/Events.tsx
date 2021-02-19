@@ -20,7 +20,6 @@ const Events: React.FC<Props> = ({
   bets,
   REMOVE_FROM_BET_SLIP,
 }) => {
-
   /* function to place a bet */
   function placeBet(selection: SelectionItem, selectionIDs: Array<string>) {
     const idsToRemoveBet = selectionIDs.filter((id) => id !== selection.id);
@@ -29,33 +28,103 @@ const Events: React.FC<Props> = ({
       REMOVE_FROM_BET_SLIP(id);
     });
   }
+  /* function to place multiple bets */
+  function placeMultiBet(selection: SelectionItem, selectionIDs: Array<string>) {
+    ADD_TO_BET_SLIP(selection);
+  }
   /* function to remove a bet */
   function removeBet(selectionId: String) {
     REMOVE_FROM_BET_SLIP(selectionId);
   }
 
+  /* Single select */
+  function singleSelect(
+    selectedIDs: Array<string>,
+    selection: {
+      id: string;
+      name: string;
+      price: number;
+    },
+    elementKey: string,
+    selectionIDs: Array<string>
+  ) {
+    if (selectedIDs.includes(selection.id)) {
+      return (
+        <Button
+          key={elementKey}
+          variant="success"
+          onClick={() => removeBet(selection.id)}
+        >
+          {selection.name}
+          <br />
+          {selection.price}
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          key={elementKey}
+          onClick={() => placeBet(selection, selectionIDs)}
+        >
+          {selection.name}
+          <br />
+          {selection.price}
+        </Button>
+      );
+    }
+  }
+
+  /* Multi select */
+  function multiSelect(
+    selectedIDs: Array<string>,
+    selection: {
+      id: string;
+      name: string;
+      price: number;
+    },
+    elementKey: string,
+    selectionIDs: Array<string>
+  ) {
+    console.log('selectedIDs', selectedIDs)
+    if (selectedIDs.includes(selection.id)) {
+      return (
+        <Button
+          key={elementKey}
+          variant="success"
+          onClick={() => removeBet(selection.id)}
+        >
+          {selection.name}
+          <br />
+          {selection.price}
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          key={elementKey}
+          onClick={() => placeMultiBet(selection, selectionIDs)}
+        >
+          {selection.name}
+          <br />
+          {selection.price}
+        </Button>
+      );
+    }
+  }
+
   /* function which displays selection buttons */
-  function selectionButtons(selections: Array<SelectionItem>) {
+  function selectionButtons(
+    selections: Array<SelectionItem>,
+    marketName: String
+  ) {
     const selectionIDs = selections.map((selection) => selection.id);
     const selectedIDs = bets.map((bet) => bet.id);
     return selections.map((selection, index) => {
       const elementKey = `${index + 1}_${selection.id}`;
-      if (selectedIDs.includes(selection.id)) {
-        return (
-          <Button key={elementKey} variant="success" onClick={() => removeBet(selection.id)}>
-            {selection.name}
-            <br />
-            {selection.price}
-          </Button>
-        );
+      if (marketName.includes("Team")) {
+        return singleSelect(selectedIDs, selection, elementKey, selectionIDs);
       } else {
-        return (
-          <Button key={elementKey} onClick={() => placeBet(selection, selectionIDs)}>
-            {selection.name}
-            <br />
-            {selection.price}
-          </Button>
-        );
+        return multiSelect(selectedIDs, selection, elementKey, selectionIDs);
       }
     });
   }
@@ -71,7 +140,7 @@ const Events: React.FC<Props> = ({
               {market.name}
             </Card.Title>
             <div className="d-flex justify-content-between">
-              {selectionButtons(market.selections)}
+              {selectionButtons(market.selections, market.name)}
             </div>
             {markets.length > index + 1 && (
               <>
